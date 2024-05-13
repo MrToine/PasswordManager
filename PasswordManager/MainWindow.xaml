@@ -30,7 +30,7 @@
             <CheckBox Content="Inclure les caractères spéciaux ?" HorizontalAlignment="Left" Margin="47,20,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckSpecialChars"/>
             <WrapPanel Margin="47,20,0,0">
                 <Button Content="Générer mon mot de passe !" HorizontalAlignment="Left" Margin="10,0,0,0" Height="38" Width="160" Background="#FF207719" Foreground="White" Click="MainButtonGenerator"/>
-                <Button Name="clipBoard" Content="Press papier" HorizontalAlignment="Left" Margin="10, 0,0,0" Height="38" Width="86" Background="#FF775519" Foreground="White" Click="MainButtonGenerator" Visibility="Hidden"/>
+                <Button Name="clipBoard" Content="Press papier" HorizontalAlignment="Left" Margin="10, 0,0,0" Height="38" Width="86" Background="#FF775519" Foreground="White" Click="MainButtonClipBoard" Visibility="Hidden"/>
                 <Button Name="SaveButton" Content="Enregistrer" HorizontalAlignment="Left" Margin="10, 0,0,0" Height="38" Width="90" Background="#FF0F6694" Foreground="White" Click="MainButtonSave" Visibility="Hidden"/>
             </WrapPanel>
         </StackPanel>

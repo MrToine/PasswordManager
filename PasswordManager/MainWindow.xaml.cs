@@ -92,6 +92,9 @@ namespace PasswordManager
                 PasswordGenerated.Content = password;
                 SaveButton.Visibility = Visibility.Visible;
                 clipBoard.Visibility = Visibility.Visible;
+                PasswordGenerated.Visibility = Visibility.Visible;
+
+                Clipboard.SetText(password);
             }
             else
             {
