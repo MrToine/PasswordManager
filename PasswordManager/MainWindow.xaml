@@ -18,20 +18,44 @@
         <Label Content="Gestionnaire de mot de passe" Foreground="#FFFFFF" FontSize="32" FontWeight="Bold" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Grid.Column="1" Height="53" Width="453"/>
         <Button Content="Générer mot de passe" HorizontalAlignment="Center" Margin="0,65,0,0" VerticalAlignment="Top" Height="25" Width="132" Background="#FF207719" BorderBrush="#FF104C0B" Foreground="White" Click="SideMenuButtonGenerator"/>
         <Button Content="Liste mot de passe" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Width="132" Background="#FF093167" Foreground="White" BorderBrush="#FF0E294E" Height="25" Click="SideMenuButtonList"/>
-        <Rectangle Grid.Column="1" Name="GeneratorWindow" HorizontalAlignment="Center" Height="297" Margin="0,90,0,0" VerticalAlignment="Top" Width="620"/>
-        <Label Grid.Column="1" Content="Quelle est la longueur du mot de passe souhaité ?" HorizontalAlignment="Left" Height="25" Margin="28,110,0,0" VerticalAlignment="Top" Width="590" Foreground="White"/>
-        <RadioButton Grid.Column="1" Content="6" HorizontalAlignment="Left" Margin="47,140,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckPassword6"/>
-        <RadioButton Grid.Column="1" Content="8" HorizontalAlignment="Left" Margin="92,140,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckPassword8" Width="35"/>
-        <RadioButton Grid.Column="1" Content="12" HorizontalAlignment="Left" Margin="132,140,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckPassword12" Width="44"/>
-        <RadioButton Grid.Column="1" Content="16" HorizontalAlignment="Left" Margin="181,140,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckPassword16" Width="44"/>
-        <RadioButton Grid.Column="1" Content="18" HorizontalAlignment="Left" Margin="230,140,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckPassword18" Width="44"/>
-        <CheckBox Grid.Column="1" Content="Inclure les caractères spéciaux ?" HorizontalAlignment="Left" Margin="47,186,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckSpecialChars"/>
-        <Button Grid.Column="1" Content="Générer mon mot de passe !" HorizontalAlignment="Left" Margin="47,239,0,0" VerticalAlignment="Top" Height="38" Width="160" Background="#FF207719" Foreground="White" Click="MainButtonGenerator"/>
-        <Button Grid.Column="1" Name="clipBoard" Content="Press papier" HorizontalAlignment="Left" Margin="240,239,0,0" VerticalAlignment="Top" Height="38" Width="86" Background="#FF775519" Foreground="White" Click="MainButtonGenerator" Visibility="Hidden"/>
-        <Label Grid.Column="1" Name="PasswordGenerated" Content="" HorizontalAlignment="Left" Margin="111,329,0,0" VerticalAlignment="Top" Height="58" Width="449" Foreground="#FF207719" FontSize="32"/>
-        <Button Grid.Column="1" Name="SaveButton" Content="Enregistrer" HorizontalAlignment="Left" Margin="360,239,0,0" VerticalAlignment="Top" Height="38" Width="90" Background="#FF0F6694" Foreground="White" Click="MainButtonSave" Visibility="Hidden"/>
+        <StackPanel Name="GeneratorPanel" Grid.Column="1" HorizontalAlignment="Center" Margin="0,90,0,0" VerticalAlignment="Top" Width="620" Visibility="Hidden">
+            <Label Content="Quelle est la longueur du mot de passe souhaité ?" HorizontalAlignment="Left" Height="25" Margin="28,0,0,0" VerticalAlignment="Top" Width="590" Foreground="White"/>
+            <WrapPanel Margin="47,10,0,0">
+                <RadioButton Content="6" Foreground="White" Checked="MainCheckPassword6"/>
+                <RadioButton Content="8" Margin="10,0,0,0" Foreground="White" Checked="MainCheckPassword8" Width="35"/>
+                <RadioButton Content="12" Margin="10,0,0,0" Foreground="White" Checked="MainCheckPassword12" Width="44"/>
+                <RadioButton Content="16" Margin="10,0,0,0" Foreground="White" Checked="MainCheckPassword16" Width="44"/>
+                <RadioButton Content="18" Margin="10,0,0,0" Foreground="White" Checked="MainCheckPassword18" Width="44"/>
+            </WrapPanel>
+            <CheckBox Content="Inclure les caractères spéciaux ?" HorizontalAlignment="Left" Margin="47,20,0,0" VerticalAlignment="Top" Foreground="White" Checked="MainCheckSpecialChars"/>
+            <WrapPanel Margin="47,20,0,0">
+                <Button Content="Générer mon mot de passe !" HorizontalAlignment="Left" Margin="10,0,0,0" Height="38" Width="160" Background="#FF207719" Foreground="White" Click="MainButtonGenerator"/>
+                <Button Name="clipBoard" Content="Press papier" HorizontalAlignment="Left" Margin="10, 0,0,0" Height="38" Width="86" Background="#FF775519" Foreground="White" Click="MainButtonGenerator" Visibility="Hidden"/>
+                <Button Name="SaveButton" Content="Enregistrer" HorizontalAlignment="Left" Margin="10, 0,0,0" Height="38" Width="90" Background="#FF0F6694" Foreground="White" Click="MainButtonSave" Visibility="Hidden"/>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Name="FormPanel" Grid.Column="1" HorizontalAlignment="Center" Margin="0,90,0,0" VerticalAlignment="Top" Width="620" Visibility="Hidden" Height="268">
+            <Label Grid.Column="1" Content="Donner un nom au mot de passe : " HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top" Width="212" Foreground="White"/>
+            <WrapPanel Margin="20,10,0,0">
+                <TextBox Grid.Column="1" Name="FormNamePassword" Text="" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" Height="26" FontSize="16"/>
+                <Button Content="Enregistrer" Margin="10,0,0,0" Height="26" Width="90" Background="#FF0F6694" Foreground="White" Click="FormButtonSave"/>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Name="PasswordsList" Grid.Column="1" HorizontalAlignment="Center" Margin="0, 90, 0, 0" VerticalAlignment="Top" Width="620" Height="268" Visibility="Visible">
+            <TabControl Height="268">
+                <TabItem Header="Liste des mot de passe">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Grid Background="#333333">
+                            <StackPanel Name="NameItemsPanel" Margin="10, 0, 0, 0" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                            <StackPanel Name="PasswordItemsPanel" Margin="270, 0, 0, 0" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                            <StackPanel Name="ButtonsItemPanel" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="480,5,0,0" />
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+        <Label Name="PasswordGenerated" Content="" HorizontalAlignment="Center" Margin="28,329,0,0" VerticalAlignment="Top" Height="58" Width="448" Foreground="#FF207719" FontSize="32" Grid.Column="1"/>
         <Label Grid.Column="1" Name="ErrorMessage" Content="" HorizontalAlignment="Left" Margin="28,329,0,0" VerticalAlignment="Top" Height="58" Width="590" Foreground="#FFC81C1C" FontSize="32" Background="{x:Null}"/>
         <Rectangle Grid.Column="1" Name="ListWindow" HorizontalAlignment="Center" Height="275" Margin="0,68,0,0" VerticalAlignment="Top" Width="620"/>
-
     </Grid>
 </Window>

@@ -18,23 +18,39 @@ namespace PasswordManager
     public partial class MainWindow : Window
     {
         private PasswordGenerator generator;
-        int nbChars = 0;
+        private int nbChars = 0;
+        private string password = "";
         bool withSpecials = false;
 
         public MainWindow()
         {
             InitializeComponent();
-            generator = new PasswordGenerator();
+            GeneratorPanel.Visibility = Visibility.Visible;
+            PasswordsList.Visibility = Visibility.Hidden;
+
+            generator = new PasswordGenerator(this);
         }
 
         private void SideMenuButtonGenerator(object sender, RoutedEventArgs e)
         {
-
+            GeneratorPanel.Visibility = Visibility.Visible;
+            PasswordsList.Visibility = Visibility.Hidden;
+            FormPanel.Visibility = Visibility.Hidden;
+            ErrorMessage.Visibility = Visibility.Hidden;
+            PasswordGenerated.Visibility = Visibility.Hidden;
         }
 
         private void SideMenuButtonList(object sender, RoutedEventArgs e)
         {
+            GeneratorPanel.Visibility = Visibility.Hidden;
 
+            FormPanel.Visibility = Visibility.Hidden;
+            ErrorMessage.Visibility = Visibility.Hidden;
+            ErrorMessage.Visibility = Visibility.Hidden;
+            PasswordGenerated.Visibility = Visibility.Hidden;
+
+            PasswordsList.Visibility = Visibility.Visible;
+            generator.print_passwords(generator.load_passwords());
         }
 
         private void MainCheckPassword6(object sender, RoutedEventArgs e)
@@ -72,7 +88,8 @@ namespace PasswordManager
             ErrorMessage.Content = "";
             if(nbChars >= 6)
             {
-                PasswordGenerated.Content = generator.generate_password(nbChars, withSpecials);
+                password = generator.generate_password(nbChars, withSpecials);
+                PasswordGenerated.Content = password;
                 SaveButton.Visibility = Visibility.Visible;
                 clipBoard.Visibility = Visibility.Visible;
             }
@@ -82,9 +99,27 @@ namespace PasswordManager
             }
         }
 
+        private void MainButtonClipBoard(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         private void MainButtonSave(object sender, RoutedEventArgs e)
         {
-            generator.save_password();
+            GeneratorPanel.Visibility = Visibility.Hidden;
+            FormPanel.Visibility = Visibility.Visible;
+        }
+
+        private void FormButtonSave(object sender, RoutedEventArgs e)
+        {
+            generator.save_password(FormNamePassword.Text, password);
+            MessageBox.Show("Le mot de passe a été enregistré avec succès.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+            PasswordGenerated.Content = "Mot de passe sauvegardé !";
+            GeneratorPanel.Visibility = Visibility.Visible;
+            PasswordsList.Visibility = Visibility.Hidden;
+            FormPanel.Visibility = Visibility.Hidden;
+            PasswordGenerated.Visibility = Visibility.Hidden;
+            ErrorMessage.Visibility = Visibility.Hidden;
         }
     }
 }
