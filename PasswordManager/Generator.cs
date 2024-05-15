@@ -46,7 +46,7 @@ namespace Generator
             return "Nombre de caractères invalide.";
         }
 
-        public void save_password(string namePassword, string password)
+        public bool save_password(string namePassword, string password)
         {
             List<Password> passwordList = new List<Password>();
             if(File.Exists(DATA_FILE))
@@ -57,10 +57,22 @@ namespace Generator
 
             if(passwordList != null)
             {
+                foreach(var pass in passwordList)
+                {
+                    if(namePassword == pass.SaveName)
+                    {
+                        main.ErrorMessage.Visibility = Visibility.Visible;
+                        main.PasswordGenerated.Visibility = Visibility.Hidden;
+                        main.ErrorMessage.Content = "Ce nom est déjà enregistré.";
+                        return false;
+                    }
+                }
                 passwordList.Add(new Password { SaveName = namePassword, SavePassword = password });
                 string convert_file = JsonConvert.SerializeObject(passwordList, Formatting.Indented);
                 File.WriteAllText(DATA_FILE, convert_file);
+
             }
+            return true;
         }
 
         public Dictionary<string, string> load_passwords()
@@ -99,7 +111,7 @@ namespace Generator
                 PasswordBlock.Foreground = Brushes.White;
                 PasswordBlock.FontSize = 18;
 
-
+                /* Bouton Clipboard */                
                 Button clipBoardButtonListPanel = new Button();
                 clipBoardButtonListPanel.Content = "Press papier";
                 clipBoardButtonListPanel.Height = 16;
@@ -113,10 +125,26 @@ namespace Generator
                 };
                 clipBoardButtonListPanel.FontSize = 8;
                 clipBoardButtonListPanel.Margin = new Thickness(0, 0, 0, 8);
-                
+
+                /* Bouton Delete */
+                Button DeleteButtonListPanel = new Button();
+                DeleteButtonListPanel.Content = "X";
+                DeleteButtonListPanel.Height = 16;
+                DeleteButtonListPanel.Width = 10;
+                DeleteButtonListPanel.Background = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F0F0F0"));
+                DeleteButtonListPanel.Foreground = System.Windows.Media.Brushes.White;
+                DeleteButtonListPanel.Click += (sender, e) =>
+                {
+                    Button button = (Button)sender;
+                    Clipboard.SetText(pass.Value);
+                };
+                clipBoardButtonListPanel.FontSize = 8;
+                clipBoardButtonListPanel.Margin = new Thickness(0, 0, 0, 8);
+
                 main.NameItemsPanel.Children.Add(NameBlock);
                 main.PasswordItemsPanel.Children.Add(PasswordBlock);
-                main.ButtonsItemPanel.Children.Add(clipBoardButtonListPanel);
+                main.ButtonCopyItemPanel.Children.Add(clipBoardButtonListPanel);
+                main.ButtonDeleteItemPanel.Children.Add(DeleteButtonListPanel);
             }
         }
     }

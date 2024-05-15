@@ -8,7 +8,7 @@ namespace PasswordClass
 {
     internal class Password
     {
-        public string SaveName { get; set; }
-        public string SavePassword { get; set; }
+        public string? SaveName { get; set; }
+        public string? SavePassword { get; set; }
     }
 }

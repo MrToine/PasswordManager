@@ -115,14 +115,16 @@ namespace PasswordManager
 
         private void FormButtonSave(object sender, RoutedEventArgs e)
         {
-            generator.save_password(FormNamePassword.Text, password);
-            MessageBox.Show("Le mot de passe a été enregistré avec succès.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
-            PasswordGenerated.Content = "Mot de passe sauvegardé !";
-            GeneratorPanel.Visibility = Visibility.Visible;
-            PasswordsList.Visibility = Visibility.Hidden;
-            FormPanel.Visibility = Visibility.Hidden;
-            PasswordGenerated.Visibility = Visibility.Hidden;
-            ErrorMessage.Visibility = Visibility.Hidden;
+            if(generator.save_password(FormNamePassword.Text, password))
+            {
+                MessageBox.Show("Le mot de passe a été enregistré avec succès.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                PasswordGenerated.Content = "Mot de passe sauvegardé !";
+                GeneratorPanel.Visibility = Visibility.Visible;
+                PasswordsList.Visibility = Visibility.Hidden;
+                FormPanel.Visibility = Visibility.Hidden;
+                PasswordGenerated.Visibility = Visibility.Hidden;
+                ErrorMessage.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

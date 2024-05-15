@@ -48,7 +48,8 @@
                         <Grid Background="#333333">
                             <StackPanel Name="NameItemsPanel" Margin="10, 0, 0, 0" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left" />
                             <StackPanel Name="PasswordItemsPanel" Margin="270, 0, 0, 0" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                            <StackPanel Name="ButtonsItemPanel" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="480,5,0,0" />
+                            <StackPanel Name="ButtonCopyItemPanel" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Margin="480,5,0,0" />
+                            <StackPanel Name="ButtonDeleteItemPanel" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" Margin="580,5,0,0" />
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
